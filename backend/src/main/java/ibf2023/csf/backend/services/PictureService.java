@@ -1,16 +1,12 @@
 package ibf2023.csf.backend.services;
 
 import java.io.IOException;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import ibf2023.csf.backend.models.Picture;
-import ibf2023.csf.backend.models.Result;
 import ibf2023.csf.backend.repositories.ImageRepository;
 import ibf2023.csf.backend.repositories.PictureRepository;
 import jakarta.json.Json;
