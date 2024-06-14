@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { WebcamImage } from 'ngx-webcam';
+import { PictureService } from '../picture.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-picture',
@@ -9,10 +12,24 @@ import { WebcamImage } from 'ngx-webcam';
 export class PictureComponent implements OnInit{
 
   // TODO: Task 2
-  webcamImage!: WebcamImage
+  webcamImage!: WebcamImage;
+  fb!: FormGroup
+  private readonly pictureSvc = inject(PictureService)
+  private readonly router = inject(Router)
 
   ngOnInit(): void {
-    
+    this.pictureSvc.img$.subscribe((img) => {
+      this.webcamImage = img
+    })
+    this.fb = new FormGroup({
+      title: new FormControl("", Validators.compose([Validators.required, Validators.minLength(5)])),
+      comments: new FormControl()
+    })
+  }
+
+  handleBack() {
+    const isDiscard = confirm("Do you want to discard the photo?");
+    (isDiscard) ? this.router.navigate([""]) : console.info("Staying in view 2");
   }
   // TODO: Task 3
 

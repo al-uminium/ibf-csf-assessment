@@ -6,15 +6,23 @@ import { MainComponent } from './views/main.component';
 import { PictureComponent } from './views/picture.component';
 import { WebcamModule } from 'ngx-webcam';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PictureService } from './picture.service';
+import { UploadService } from './upload.service';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  {path: "", component: MainComponent},
+  {path: "picture", component:PictureComponent}
+]
 
 @NgModule({
   declarations: [
     AppComponent, MainComponent, PictureComponent
   ],
   imports: [
-    BrowserModule, WebcamModule, ReactiveFormsModule
+    BrowserModule, WebcamModule, ReactiveFormsModule, RouterModule.forRoot(appRoutes, { useHash: true })
   ],
-  providers: [],
+  providers: [PictureService, UploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

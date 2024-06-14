@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { PictureService } from '../picture.service';
+import { WebcamImage } from 'ngx-webcam';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -10,13 +13,15 @@ import { Observable, Subject } from 'rxjs';
 export class MainComponent implements OnInit {
 
   // TODO: Task 1
-  width: number = 500
   height: number = 282
-  img: Subject<void> = new Subject<void>
   fb!: FormGroup
+  img: Subject<void> = new Subject<void>
+  webCamImg!: WebcamImage
   aspectRatio: string[] = ["16:9", "4:3", "3:2", "1:1"]
 
-  
+  private readonly pictureSvc = inject(PictureService);
+  private readonly router = inject(Router);
+
   ngOnInit(): void {
     this.fb = new FormGroup({
       ratio: new FormControl("16:9", Validators.required)
@@ -43,6 +48,12 @@ export class MainComponent implements OnInit {
   }
 
   handleSnap() {
-    this.img.next();
+    this.img.next()
+  }
+
+  handleImageCapture(webcamImage: WebcamImage) {
+    // this.webCamImg = webcamImage;
+    this.pictureSvc.setImg(webcamImage);
+    this.router.navigate(["picture"])
   }
 }

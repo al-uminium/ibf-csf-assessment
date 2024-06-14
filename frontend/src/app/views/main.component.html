@@ -1,5 +1,5 @@
 <!-- View 1 -->
-<webcam [height]="height" [width]="width" [trigger]="img" [imageType: string]="image/png">
+<webcam [height]="height" [width]=500 [trigger]="img" imageType="image/png" (imageCapture)="handleImageCapture($event)">
 
 </webcam>
 

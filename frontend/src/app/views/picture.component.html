@@ -1,1 +1,16 @@
 <!-- View 2 -->
+<div>
+  <img [src]="webcamImage.imageAsDataUrl">
+  <form action="" [formGroup]="fb">
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" name="title" id="title" formControlName="title">
+    </div>
+    <div>
+      <label for="comments">Comments:</label>
+      <textarea name="comments" id="comments" formControlName="comments"></textarea>
+    </div>
+    <button type="submit" [disabled]="fb.invalid" >Post</button>
+  </form>
+  <button type="button" (click)="handleBack()">Back</button>
+</div>
