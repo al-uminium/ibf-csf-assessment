@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, HostListener, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { PictureService } from '../picture.service';
@@ -14,6 +14,7 @@ export class MainComponent implements OnInit {
 
   // TODO: Task 1
   height: number = 282
+  width: number = 500
   fb!: FormGroup
   img: Subject<void> = new Subject<void>
   webCamImg!: WebcamImage
@@ -44,6 +45,7 @@ export class MainComponent implements OnInit {
       case "1:1":
         this.height = 500
         break;
+
     }
   }
 
@@ -52,8 +54,8 @@ export class MainComponent implements OnInit {
   }
 
   handleImageCapture(webcamImage: WebcamImage) {
-    // this.webCamImg = webcamImage;
     this.pictureSvc.setImg(webcamImage);
     this.router.navigate(["picture"])
   }
+
 }

@@ -19,6 +19,7 @@ export class UploadService {
     formData.append('img', imgFile);
     formData.append('title', title);
     (typeof(comments) == "string") ? formData.append("comments", comments) : formData.append("comments", "");
+    console.log("Posting to: " + this.url);
     return this.http.post(this.url, formData)
   }
 }

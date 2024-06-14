@@ -20,7 +20,7 @@ export class PictureComponent implements OnInit{
 
   ngOnInit(): void {
     this.pictureSvc.img$.subscribe((img) => {
-      this.webcamImage = img
+      this.webcamImage = img;
     })
     this.fb = new FormGroup({
       title: new FormControl("", Validators.compose([Validators.required, Validators.minLength(5)])),

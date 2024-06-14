@@ -2,6 +2,7 @@ package ibf2023.csf.backend.controllers;
 
 import java.io.IOException;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ibf2023.csf.backend.services.PictureService;
 import jakarta.json.Json;
+import jakarta.json.JsonObject;
 
 // You can add addtional methods and annotations to this controller. 
 // You cannot remove any existing annotations or methods from UploadController
@@ -28,13 +30,13 @@ public class UploadController {
 	public ResponseEntity<String> postUpload(@RequestPart("img") MultipartFile img, @RequestParam("title") String title, @RequestParam(value="comments",required=false) String comments) {
 
 		try {
-			picSvc.save(img, title, comments);
+			JsonObject resp = picSvc.save(img, title, comments);
+			return ResponseEntity.ok(resp.toString());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return ResponseEntity.internalServerError()
+				.body(Json.createObjectBuilder()
+				.add("message", e.getMessage()).build().toString());
 		}
-		return ResponseEntity.ok(
-			Json.createObjectBuilder().build().toString()
-		);
+		
 	}
 }

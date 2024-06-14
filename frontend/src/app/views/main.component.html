@@ -1,6 +1,5 @@
 <!-- View 1 -->
-<webcam [height]="height" [width]=500 [trigger]="img" imageType="image/png" (imageCapture)="handleImageCapture($event)">
-
+<webcam [trigger]="img" imageType="image/png" [height]="height" [width]="500" (imageCapture)="handleImageCapture($event)">
 </webcam>
 
 <form action="" [formGroup]="fb" >
