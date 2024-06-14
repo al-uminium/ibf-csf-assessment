@@ -17,10 +17,10 @@ FROM openjdk:21 AS javabuild
 
 WORKDIR /webcamapp
 
-COPY webcamapp/mvnw .
-COPY webcamapp/pom.xml .
-COPY webcamapp/.mvn .mvn
-COPY webcamapp/src src
+COPY backend/mvnw .
+COPY backend/pom.xml .
+COPY backend/.mvn .mvn
+COPY backend/src src
 
 COPY --from=ngbuild /frontend/dist/frontend/browser/ src/main/resources/static
 
