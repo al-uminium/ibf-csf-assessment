@@ -1,1 +1,15 @@
 <!-- View 1 -->
+<webcam [height]="height" [width]="width" [trigger]="img" [imageType: string]="image/png">
+
+</webcam>
+
+<form action="" [formGroup]="fb" >
+  <div>
+  @for (r of aspectRatio; track $index) {
+      <input type="radio" name="ratio" [value]="r" [id]="r" formControlName="ratio" (click)="handleAspectRatio($event)">
+      <label [for]="r">{{ r }}</label>
+    }
+  </div>
+</form>
+
+<button (click)="handleSnap()">Snap</button>
