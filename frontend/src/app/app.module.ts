@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PictureService } from './picture.service';
 import { UploadService } from './upload.service';
 import { RouterModule, Routes } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 
 const appRoutes: Routes = [
   {path: "", component: MainComponent},
@@ -22,7 +23,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule, WebcamModule, ReactiveFormsModule, RouterModule.forRoot(appRoutes, { useHash: true })
   ],
-  providers: [PictureService, UploadService],
+  providers: [PictureService, UploadService, provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
